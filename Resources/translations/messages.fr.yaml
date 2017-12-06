@@ -1,0 +1,14 @@
+Your current alerts are: Vos alertes sont
+No alerts yet.: Il n'y a pas d'alertes.
+You've reached the maximum number of alerts.: Vous avez atteint la limite maximale d'alertes.
+To remove an alert, type `/reset` followed by the keyword.: Pour supprimer une alerte, tapez `/reset` suivi de l'alerte.
+To add an alert, type `/alert` followed by a keyword.: Pour ajouter une alerte, tapez `/alert` suivi d'un mot clé.
+The maximum number of alert per user is *4*.: Le nombre maximal d'alertes par utilisateur est *4*.
+"*Ex*: _I want to get updates about the train from and/or to Mons_: `/alert Mons`": "*Exemple:* _je voudrais recevoir des notifications à propos des trains de et vers Mons_: `/alert Mons`"
+"*Ex*: _I want to get updates about a specific train_: `/alert IC1234`": "*Exemple:* _je voudrais recevoir les notifications d'un train spécifique_: `/alert IC1234`"
+"Hello and welcome, here are the available commands:": "Bonjour et bienvenue! Voici la liste des commandes disponibles:"
+"If you need more help, you may contact [the author](tg://user?id=50990348) as well.": "Si vous avez besoin d'aide, vous pouvez contacter [l'auteur](tg://user?id=50990348) également."
+"To list your current alerts, type `/alert` only.": "Pour lister vos alertes en cours, tapez: `/alert`"
+"Manage your alerts": "Ajouter des alertes"
+"Display some help": "Afficher de l'aide"
+"Clear your alerts": "Supprimer des alertes"

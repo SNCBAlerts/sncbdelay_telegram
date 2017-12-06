@@ -1,0 +1,57 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    drupol\sncbdelay_telegram\:
+        resource: '../../*'
+        exclude: '../../{Entity,Migrations,Tests,TelegramCommands}'
+
+    sncbdelay_telegram.telegram:
+        class: Telegram\Bot\Api
+        arguments: ["@=container.getParameter('telegram')['bot_api_key']"]
+        public: true
+
+    drupol\sncbdelay_telegram\EventSubscriber\Telegram\Alert:
+        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+
+    drupol\sncbdelay_telegram\EventSubscriber\Telegram\Delay:
+        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+
+    drupol\sncbdelay_telegram\EventSubscriber\Telegram\Canceled:
+        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+
+    drupol\sncbdelay_telegram\EventSubscriber\Telegram\Custom:
+        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+
+    drupol\sncbdelay_telegram\TelegramCommands\AbstractUserCommand:
+        class: drupol\sncbdelay_telegram\TelegramCommands\AbstractUserCommand
+        abstract:  true
+        calls:
+            - [setContainer, ['@service_container']]
+
+    drupol\sncbdelay_telegram\TelegramCommands\AlertCommand:
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true
+
+    drupol\sncbdelay_telegram\TelegramCommands\HelpCommand:
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true
+
+    drupol\sncbdelay_telegram\TelegramCommands\ResetCommand:
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true
+
+    drupol\sncbdelay_telegram\TelegramCommands\DebugCommand:
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true

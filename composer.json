@@ -1,0 +1,26 @@
+{
+  "name": "drupol/sncbdelay_telegram",
+  "type": "symfony-bundle",
+  "description": "TODO",
+  "authors": [
+    {
+      "name": "Pol Dellaiera",
+      "email": "pol.dellaiera@protonmail.com"
+    }
+  ],
+  "require": {
+    "symfony/framework-bundle": "~2.7|~3.0|^4.0",
+    "twig/twig": "^2.4",
+    "symfony/routing": "^4.0",
+    "doctrine/doctrine-bundle": "^1.8",
+    "irazasyed/telegram-bot-sdk": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "drupol\\sncbdelay_telegram\\": ""
+    }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.8"
+  }
+}

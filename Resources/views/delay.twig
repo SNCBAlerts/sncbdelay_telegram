@@ -1,0 +1,1 @@
+#{{ train|split('.')|last }}{% if lines is not empty %} ({% if lines|length > 1 %}lines {% else %}line {% endif %}{% for line in lines %}#L{{ line }}{% if not loop.last %}, {% endif %}{% endfor %}){% endif %}{% if '?' != platform %} (platform {{ platform }}){% endif %} from *{{ station_from|raw }}* to *{{ station_to|raw }}* @ *{{ date }}* *+{{ delay }}m*. #delayed

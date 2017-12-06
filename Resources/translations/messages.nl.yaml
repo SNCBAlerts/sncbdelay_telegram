@@ -1,0 +1,14 @@
+Your current alerts are: Je huidige meldingen zijn
+No alerts yet.: Nog geen meldingen.
+You've reached the maximum number of alerts.: U heeft het maximale aantal meldingen bereikt.
+To remove an alert, type `/reset` followed by the keyword.: Om een waarschuwing te verwijderen, typt u `/reset` gevolgd door het sleutelwoord.
+To add an alert, type `/alert` followed by a keyword.: Als u een waarschuwing wilt toevoegen, typt u `/alert` gevolgd door een trefwoord.
+The maximum number of alert per user is *4*.: Het maximale aantal waarschuwingen per gebruiker is *4*.
+"*Ex*: _I want to get updates about the train from and/or to Mons_: `/alert Mons`": "*Voorbeeld:* _ik wil meldingen ontvangen over de trein van en/of naar Bergen_: `/alert Mons`"
+"*Ex*: _I want to get updates about a specific train_: `/alert IC1234`": "*Voorbeeld:* _ik wil graag meldingen ontvangen van een specifieke trein_: `/alert IC1234`"
+"Hello and welcome, here are the available commands:": "Hallo en welkom, hier zijn de beschikbare commando's:"
+"If you need more help, you may contact [the author](tg://user?id=50990348) as well.": "Als u meer hulp nodig heeft, kunt u ook contact opnemen met [de auteur](tg://user?id=50990348)."
+"To list your current alerts, type `/alert` only.": "Typ `/alert` alleen om uw huidige meldingen weer te geven."
+"Manage your alerts": "Meldingen toevoegen"
+"Display some help": "Geef wat hulp weer"
+"Clear your alerts": "Meldingen verwijderen"

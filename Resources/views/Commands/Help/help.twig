@@ -1,0 +1,7 @@
+{{ "Hello and welcome, here are the available commands:"|trans({}, "messages", lang)|raw }}
+
+{% for command,description in commands %}
+`/{{ command }}` {{ description|trans({}, "messages", lang)|raw }}
+{% endfor %}
+
+{{ "If you need more help, you may contact [the author](tg://user?id=50990348) as well."|trans({}, "messages", lang)|raw }}

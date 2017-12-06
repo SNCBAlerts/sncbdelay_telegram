@@ -1,0 +1,10 @@
+{% if subscriptions %}
+{{ "Your current alerts are"|trans({}, "messages", lang)|raw }}:
+
+{% for subscription in subscriptions %}
+- `{{ subscription.token }}`
+{% endfor %}
+
+{% else %}
+{{ "No alerts yet."|trans({}, "messages", lang)|raw }}
+{% endif %}
