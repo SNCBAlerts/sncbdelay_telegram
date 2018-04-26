@@ -18,7 +18,7 @@ class Webhook extends Controller
         /** @var \Telegram\Bot\Api $telegram */
         $telegram = $this->container->get('sncbdelay_telegram.telegram');
 
-        $hook_url = 'https://young-cliffs-90300.herokuapp.com/telegram/get';
+        $hook_url = 'https://sncbalerts.herokuapp.com/telegram/get';
 
         try {
             $telegram->setWebhook(['url' => $hook_url]);
