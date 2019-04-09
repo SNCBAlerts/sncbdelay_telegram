@@ -19,16 +19,16 @@ services:
         public: true
 
     drupol\sncbdelay_telegram\EventSubscriber\Telegram\Alert:
-        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+        arguments: ['@sncbdelay_telegram.telegram', '@parameter_bag', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
 
     drupol\sncbdelay_telegram\EventSubscriber\Telegram\Delay:
-        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+        arguments: ['@sncbdelay_telegram.telegram', '@parameter_bag', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
 
     drupol\sncbdelay_telegram\EventSubscriber\Telegram\Canceled:
-        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+        arguments: ['@sncbdelay_telegram.telegram', '@parameter_bag', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
 
     drupol\sncbdelay_telegram\EventSubscriber\Telegram\Custom:
-        arguments: ['@service_container', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
+        arguments: ['@sncbdelay_telegram.telegram', '@parameter_bag', '@twig', '@logger', '@cache.app', '@doctrine.orm.entity_manager']
 
     drupol\sncbdelay_telegram\TelegramCommands\AbstractUserCommand:
         class: drupol\sncbdelay_telegram\TelegramCommands\AbstractUserCommand

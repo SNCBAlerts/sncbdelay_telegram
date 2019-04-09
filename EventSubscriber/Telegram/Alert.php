@@ -7,10 +7,15 @@ use Symfony\Component\EventDispatcher\Event;
 
 class Alert extends AbstractTelegramAlertEventSubscriber
 {
+
     /**
      * @param \Symfony\Component\EventDispatcher\Event $event
      *
      * @return mixed|string
+     *
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function getMessage(Event $event)
     {

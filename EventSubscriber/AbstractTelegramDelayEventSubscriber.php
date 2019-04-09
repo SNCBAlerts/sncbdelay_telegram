@@ -33,11 +33,11 @@ abstract class AbstractTelegramDelayEventSubscriber extends AbstractTelegramEven
         $cache2 = $this->cache->getItem($uniqid2)->expiresAfter(new \DateInterval('PT10M'));
 
         if (
+            $departure['time'] > $currentTime - 600 &&
+            $departure['delay'] > 0 &&
             !$cache1->isHit() &&
             !$cache2->isHit() &&
-            $departure['time'] > $currentTime - 600 &&
-            abs($departure['time'] - $currentTime) <= 1200 &&
-            $departure['delay'] > 0
+            abs($departure['time'] - $currentTime) <= 1200
         ) {
             $this->process($event);
 

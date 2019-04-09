@@ -33,9 +33,9 @@ abstract class AbstractTelegramCanceledEventSubscriber extends AbstractTelegramE
         $cache2 = $this->cache->getItem($uniqid2);
 
         if (
+            $departure['time'] > $currentTime &&
             !$cache1->isHit() &&
             !$cache2->isHit() &&
-            $departure['time'] > $currentTime &&
             abs($departure['time'] - $currentTime) <= 2400
         ) {
             $this->process($event);

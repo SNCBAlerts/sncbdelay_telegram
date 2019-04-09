@@ -2,13 +2,13 @@
 
 namespace drupol\sncbdelay_telegram\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Telegram\Bot\Exceptions\TelegramSDKException;
 
-class Webhook extends Controller
+class Webhook extends AbstractController
 {
     /**
      * @Route("/telegram/set", name="telegram_set_webhook")
@@ -36,12 +36,14 @@ class Webhook extends Controller
     {
         /** @var \Telegram\Bot\Api $telegram */
         $telegram = $this->container->get('sncbdelay_telegram.telegram');
+
         $telegram->addCommands([
             $this->container->get('drupol\sncbdelay_telegram\TelegramCommands\AlertCommand'),
             $this->container->get('drupol\sncbdelay_telegram\TelegramCommands\HelpCommand'),
             $this->container->get('drupol\sncbdelay_telegram\TelegramCommands\ResetCommand'),
             $this->container->get('drupol\sncbdelay_telegram\TelegramCommands\DebugCommand'),
         ]);
+
         $telegram->commandsHandler(true);
 
         return new JsonResponse(['result' => true]);

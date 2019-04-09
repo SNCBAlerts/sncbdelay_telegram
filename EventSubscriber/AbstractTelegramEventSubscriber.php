@@ -5,9 +5,11 @@ namespace drupol\sncbdelay_telegram\EventSubscriber;
 use Doctrine\ORM\EntityManager;
 use drupol\sncbdelay\EventSubscriber\AbstractEventSubscriber;
 use Psr\Cache\CacheItemPoolInterface;
-use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\EventDispatcher\Event;
+use Telegram\Bot\Api;
+use Twig\Environment;
 
 abstract class AbstractTelegramEventSubscriber extends AbstractEventSubscriber
 {
@@ -19,19 +21,17 @@ abstract class AbstractTelegramEventSubscriber extends AbstractEventSubscriber
     /**
      * AbstractTelegramEventSubscriber constructor.
      *
-     * @param \Psr\Container\ContainerInterface $container
-     * @param \Twig_Environment $twig
+     * @param \Telegram\Bot\Api $telegram
+     * @param \Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface $parameters
+     * @param \Twig\Environment $twig
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Psr\Cache\CacheItemPoolInterface $cache
      * @param \Doctrine\ORM\EntityManager $doctrine
-     *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function __construct(ContainerInterface $container, \Twig_Environment $twig, LoggerInterface $logger, CacheItemPoolInterface $cache, EntityManager $doctrine)
+    public function __construct(Api $telegram, ContainerBagInterface $parameters, Environment $twig, LoggerInterface $logger, CacheItemPoolInterface $cache, EntityManager $doctrine)
     {
-        $this->telegram = $container->get('sncbdelay_telegram.telegram');
-        parent::__construct($container, $twig, $logger, $cache, $doctrine);
+        parent::__construct($parameters, $twig, $logger, $cache, $doctrine);
+        $this->telegram = $telegram;
     }
 
     /**
@@ -59,13 +59,15 @@ abstract class AbstractTelegramEventSubscriber extends AbstractEventSubscriber
 
         /** @var \drupol\sncbdelay_telegram\Entity\Subscription $subscription */
         foreach ($subscriptions as $subscription) {
-            if (false !== stripos($text, $subscription['token'])) {
-                $this->telegram->sendMessage([
-                    'chat_id' => $subscription['chatId'],
-                    'text' => $text,
-                    'parse_mode' => 'Markdown'
-                ]);
+            if (false === stripos($text, $subscription['token'])) {
+                continue;
             }
+
+            $this->telegram->sendMessage([
+                'chat_id' => $subscription['chatId'],
+                'text' => $text,
+                'parse_mode' => 'Markdown'
+            ]);
         }
     }
 
@@ -77,7 +79,7 @@ abstract class AbstractTelegramEventSubscriber extends AbstractEventSubscriber
     public function sendToChannel(Event $event)
     {
         $text = $this->getMessage($event);
-        $telegramConfig = $this->getContainer()->getParameter('telegram');
+        $telegramConfig = $this->parameters->get('telegram');
 
         $this->telegram->sendMessage([
             'chat_id' => $telegramConfig['public_channel'],
