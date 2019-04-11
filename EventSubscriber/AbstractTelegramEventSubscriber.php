@@ -2,7 +2,7 @@
 
 namespace drupol\sncbdelay_telegram\EventSubscriber;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use drupol\sncbdelay\EventSubscriber\AbstractEventSubscriber;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
@@ -26,9 +26,9 @@ abstract class AbstractTelegramEventSubscriber extends AbstractEventSubscriber
      * @param \Twig\Environment $twig
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Psr\Cache\CacheItemPoolInterface $cache
-     * @param \Doctrine\ORM\EntityManager $doctrine
+     * @param \Doctrine\ORM\EntityManagerInterface $doctrine
      */
-    public function __construct(Api $telegram, ContainerBagInterface $parameters, Environment $twig, LoggerInterface $logger, CacheItemPoolInterface $cache, EntityManager $doctrine)
+    public function __construct(Api $telegram, ContainerBagInterface $parameters, Environment $twig, LoggerInterface $logger, CacheItemPoolInterface $cache, EntityManagerInterface $doctrine)
     {
         parent::__construct($parameters, $twig, $logger, $cache, $doctrine);
         $this->telegram = $telegram;
